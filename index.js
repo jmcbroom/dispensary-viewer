@@ -20,6 +20,9 @@ var map = new mapboxgl.Map({
     ]
 });
 
+var nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
+
 // once the map's loaded
 map.on('load', function(){
   // add the dispensaries
