@@ -1,0 +1,23 @@
+{
+  "name": "dispensary-viewer",
+  "version": "1.0.0",
+  "description": "Marijuana dispensary viewer for the City of Detroit",
+  "main": "index.js",
+  "dependencies": {
+    "mapbox-gl": "^0.30.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmcbroom/dispensary-viewer.git"
+  },
+  "author": "Jimmy McBroom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmcbroom/dispensary-viewer/issues"
+  },
+  "homepage": "https://github.com/jmcbroom/dispensary-viewer#readme"
+}

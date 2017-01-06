@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <title> </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+  <body>
+    <div class="mw-100 center ph1-ns">
+      <div class="cf ph2-ns">
+        <div class="fl w-100 pa1">
+          <div class="bg-green pa2">
+            <span class="fw7 f3">Dispensary Viewer</span>
+          </div>
+        </div>
+      </div>
+      <div class="cf ph2-ns h-75">
+        <div class="fl w-100 w-70-l pa1 h-75">
+          <div class="outline bg-white h-75" id="map"></div>
+        </div>
+        <div class="fl w-100 w-30-l pa1 h-75">
+          <legend class="fw7 mb2 ph1" id="selected"></legend>
+          <table class="w-100">
+              <tr><td class="f3 b bg-white pv1 ph2">Total Dispensaries:</td></tr>
+              <tr><td class="f4 b bg-white pv1 ph2" id="total">-</td></tr>
+              <tr><td class="f3 bg-red pv1 ph2">Closed by Order:</td></tr>
+              <tr><td class="f4 b bg-red pv1 ph2" id="closed">-</td></tr>
+              <tr><td class="f3 bg-orange pv1 ph2">In Enforcement Process:</td></tr>
+              <tr><td class="f4 b bg-orange pv1 ph2" id="enforcement">-</td></tr>
+              <tr><td class="f3 bg-yellow pv1 ph2">In Approval Process:</td></tr>
+              <tr><td class="f4 b bg-yellow pv1 ph2" id="approval">-</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src = "./bundle.js"></script>
+  </body>
+</html>
