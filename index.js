@@ -25,7 +25,7 @@ map.on('load', function(){
   // add the dispensaries
   map.addSource('marijuana', {
     type: 'geojson',
-    data: 'http://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/MMC_Facility_Status/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=pgeojson'
+    data: 'https://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/MMC_Facility_Status/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=pgeojson'
   });
   // a layer for the closed ones
   map.addLayer({
@@ -40,7 +40,10 @@ map.on('load', function(){
         "circle-radius": {
           stops: [[8, 1], [14, 7], [20, 12]]
         },
-        "circle-color": "red"
+        "circle-color": "red",
+        "circle-opacity": 0.66,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "black"
       }
   });
   map.addLayer({
@@ -55,7 +58,10 @@ map.on('load', function(){
         "circle-radius": {
           stops: [[8, 1], [14, 7], [20, 12]]
         },
-        "circle-color": "yellow"
+        "circle-color": "yellow",
+        "circle-opacity": 0.66,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "black"
       }
   });
   map.addLayer({
@@ -70,7 +76,10 @@ map.on('load', function(){
         "circle-radius": {
           stops: [[8, 1], [14, 7], [20, 12]]
         },
-        "circle-color": "orange"
+        "circle-color": "orange",
+        "circle-opacity": 0.66,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "black"
       }
   });
   // open a popup on click
@@ -102,14 +111,14 @@ map.on('load', function(){
 
 // summary stats
 var countReq = new XMLHttpRequest();
-countReq.open("GET", "http://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/MMC_Facility_Status/FeatureServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=Status_1&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22Status_1%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
+countReq.open("GET", "https://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/MMC_Facility_Status/FeatureServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=Status_1&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22Status_1%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
 countReq.send();
 var count = JSON.parse(countReq.response)["features"];
 var closed = count[0]["attributes"]["status_count"]
 var approval = count[1]["attributes"]["status_count"]
 var enforcement = count[2]["attributes"]["status_count"]
 var total = closed + approval + enforcement
-document.getElementById('total').innerHTML = total
+// document.getElementById('total').innerHTML = total
 document.getElementById('closed').innerHTML = closed
 document.getElementById('approval').innerHTML = approval
 document.getElementById('enforcement').innerHTML = enforcement
