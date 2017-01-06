@@ -1060,6 +1060,45 @@ map.on('load', function(){
     type: 'geojson',
     data: 'https://services2.arcgis.com/qvkbeam7Wirps6zC/ArcGIS/rest/services/MMC_Facility_Status/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=pgeojson'
   });
+
+  // add council district
+  var boundary = 'council_districts'
+  map.addSource(boundary, {
+    type: 'vector',
+    url: 'mapbox://cityofdetroit.' + boundary
+  });
+
+  // add line & fill layer
+  map.addLayer({
+    "id": boundary + "_line",
+    "type": "line",
+    "source": boundary,
+    "source-layer": boundary,
+    "layout": {
+      "visibility": "visible",
+      "line-join": "round"
+    },
+    "paint": {
+        "line-color": "green",
+        "line-opacity": {
+            stops: [
+                [8, 1],
+                [11, 0.5],
+                [16, 0.05],
+                [18, 0.01]
+            ]
+        },
+        "line-width": {
+            stops: [
+                [8, 0.1],
+                [11, 1.5],
+                [13, 5],
+                [22, 18]
+            ]
+        }
+    }
+  });
+
   // a layer for the closed ones
   map.addLayer({
       "id": "marijuana-closed",
