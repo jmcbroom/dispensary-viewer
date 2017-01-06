@@ -9,7 +9,7 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/jmcbroom/ciw2vkebp006k2kotpdkjopo6',
     doubleClickZoom: false,
-    zoom: 10.35,
+    zoom: 10.5,
     center: [-83.111, 42.350],
     // :triangular_ruler:
     bearing: -1.25,
@@ -46,7 +46,7 @@ map.on('load', function(){
       "line-join": "round"
     },
     "paint": {
-        "line-color": "green",
+        "line-color": "#189aca",
         "line-opacity": {
             stops: [
                 [8, 1],
