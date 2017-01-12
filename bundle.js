@@ -10,8 +10,8 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/jmcbroom/cixs0h7mr001m2ro6gbvjgufn',
     doubleClickZoom: false,
-    zoom: 10.5,
-    center: [-83.111, 42.350],
+    zoom: 10.7,
+    center: [-83.091, 42.350],
     // :triangular_ruler:
     bearing: -1.25,
     minZoom: 9,
