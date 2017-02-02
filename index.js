@@ -110,7 +110,7 @@ map.on('load', function(){
       "id": "marijuana-enforcement",
       "type": "circle",
       "source": "marijuana",
-      "filter": ["in", "status", "In Enforcement Process"],
+      "filter": ["in", "status", "MMCC Approved"],
       "layout": {
         "visibility": "visible"
       },
@@ -118,7 +118,7 @@ map.on('load', function(){
         "circle-radius": {
           stops: [[8, 1], [14, 7], [20, 12]]
         },
-        "circle-color": "orange",
+        "circle-color": "green",
         "circle-opacity": 0.66,
         "circle-stroke-width": 1,
         "circle-stroke-color": "black"
@@ -158,10 +158,10 @@ countReq.send();
 var count = JSON.parse(countReq.response)["features"];
 console.log(count);
 var closed = count[0]["attributes"]["status_count"]
-var approval = count[2]["attributes"]["status_count"]
-var enforcement = count[1]["attributes"]["status_count"]
-var total = closed + approval + enforcement
+var approval = count[1]["attributes"]["status_count"]
+var approved = count[2]["attributes"]["status_count"]
+var total = closed + approval + approved
 // document.getElementById('total').innerHTML = total
 document.getElementById('closed').innerHTML = closed
 document.getElementById('approval').innerHTML = approval
-document.getElementById('enforcement').innerHTML = enforcement
+document.getElementById('approved').innerHTML = approved

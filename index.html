@@ -8,34 +8,30 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+  .det-overmap {position: fixed; bottom: 70px; z-index: 5; background-color: rgba(255, 255, 255, .5);}
+  .det-legend p {padding: 10px; margin: 0px;}
+  /* body #map {margin-bottom: -100px !important;} */
+  </style>
   <body>
-    <div class="mw-100 center ph1-ns">
-      <div class="cf ph2-ns">
-        <div class="fl w-100 pa1">
-          <div class="bg-green pa2">
-            <span class="fw7 f4 b">Medical Marihuana Caregiver Center Application Status</span>
-          </div>
-        </div>
-      </div>
-      <div class="cf ph2-ns h-75">
-        <div class="fl w-100 w-70-l pa1 h-75">
-          <div class="outline bg-white h-75" id="map"></div>
-        </div>
-        <div class="fl w-100 w-30-l pa1 h-75">
-          <p class="fw7 f4 mb2 ph1" id="selected">Facility Status:</p>
-          <table class="w-100">
-              <!-- <tr><td class="f3 b bg-white pv1 ph2">Facilities total:</td></tr>
-              <tr><td class="f4 b bg-white pv1 ph2" id="total">-</td></tr> -->
-              <tr><td class="f4 bg-dark-red pa2 m3">Closed by Order:</td></tr>
-              <tr><td class="f4 b bg-dark-red pa2" id="closed">-</td></tr>
-              <tr><td class="f4 bg-orange pa2">In Enforcement Process:</td></tr>
-              <tr><td class="f4 b bg-orange pa2" id="enforcement">-</td></tr>
-              <tr><td class="f4 bg-yellow pa2">In Approval Process:</td></tr>
-              <tr><td class="f4 b bg-yellow pa2" id="approval">-</td></tr>
-          </table>
-        </div>
-      </div>
-    </div>
+
+
+
+    <div id="map"></div>
+
+	<div style="clear: both;"></div>
+
+ <div class="det-overmap">
+  <h1 style="margin: 10px;"><span class="fw7 f4 b" style="color: #333; margin-bottom: 10px;">Medical Marihuana Caregiver Center Application Status</span></h1>
+	<table class="det-legend">
+		<tr>
+			<td><p id="selected" style="margin-top: 0;">Facility Status:</p></td>
+			<td class="bg-dark-red det-status"><p>Closed by Order: <span id="closed">-</span></p></td>
+			<td class="bg-yellow det-status"><p>In Approval Process: <span id="approval">-</span></p></td>
+			<td class="bg-dark-green det-status"><p>Approved: <span id="approved">-</span></p></td>
+		</tr>
+	</table>
+</div>
     <script src = "./bundle.js"></script>
   </body>
 </html>
