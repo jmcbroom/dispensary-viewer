@@ -1035,7 +1035,7 @@ var mapboxgl = require('mapbox-gl');
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam1jYnJvb20iLCJhIjoianRuR3B1NCJ9.cePohSx5Od4SJhMVjFuCQA';
 
-document.getElementById('map').style.height = `${window.innerHeight - 70}px`;
+document.getElementById('map').style.height = `${window.innerHeight}px`;
 
 // make a map objects
 var map = new mapboxgl.Map({
@@ -1206,14 +1206,15 @@ map.on('load', function(){
 var countReq = new XMLHttpRequest();
 countReq.open("GET", "https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=status&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22status%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
 countReq.send();
+
+// assign the numbers
 var count = JSON.parse(countReq.response)["features"];
-console.log(count);
-var closed = count[0]["attributes"]["status_count"]
-var approval = count[2]["attributes"]["status_count"]
-var approved = count[3]["attributes"]["status_count"]
-var enforcement = count[1]["attributes"]["status_count"]
-var total = closed + approval + approved
-// document.getElementById('total').innerHTML = total
+var closed = count[0]["attributes"]["status_count"];
+var enforcement = count[1]["attributes"]["status_count"];
+var approval = count[2]["attributes"]["status_count"];
+var approved = count[3]["attributes"]["status_count"];
+
+// stick em in the HTML
 document.getElementById('closed').innerHTML = closed
 document.getElementById('approval').innerHTML = approval
 document.getElementById('enforcement').innerHTML = enforcement
