@@ -28,7 +28,7 @@ map.on('load', function(){
   // add the dispensaries
   map.addSource('marijuana', {
     type: 'geojson',
-    data: 'https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarijuanaFacilities/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson'
+    data: 'https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson'
   });
 
   // add council district
@@ -110,6 +110,24 @@ map.on('load', function(){
       "id": "marijuana-enforcement",
       "type": "circle",
       "source": "marijuana",
+      "filter": ["in", "status", "In Enforcement Process"],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "circle-radius": {
+          stops: [[8, 1], [14, 7], [20, 12]]
+        },
+        "circle-color": "orange",
+        "circle-opacity": 0.66,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "black"
+      }
+  });
+  map.addLayer({
+      "id": "marijuana-approved",
+      "type": "circle",
+      "source": "marijuana",
       "filter": ["in", "status", "MMCC Approved"],
       "layout": {
         "visibility": "visible"
@@ -126,7 +144,7 @@ map.on('load', function(){
   });
   // open a popup on click
   map.on('click', function (e) {
-      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval', 'marijuana-closed'] });
+      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval', 'marijuana-closed', 'marijuana-approved'] });
       if (!features.length) {
           return;
       }
@@ -153,15 +171,17 @@ map.on('load', function(){
 
 // summary stats
 var countReq = new XMLHttpRequest();
-countReq.open("GET", "https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarijuanaFacilities/FeatureServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=status&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22status%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
+countReq.open("GET", "https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=status&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22status%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
 countReq.send();
 var count = JSON.parse(countReq.response)["features"];
 console.log(count);
 var closed = count[0]["attributes"]["status_count"]
-var approval = count[1]["attributes"]["status_count"]
-var approved = count[2]["attributes"]["status_count"]
+var approval = count[2]["attributes"]["status_count"]
+var approved = count[3]["attributes"]["status_count"]
+var enforcement = count[1]["attributes"]["status_count"]
 var total = closed + approval + approved
 // document.getElementById('total').innerHTML = total
 document.getElementById('closed').innerHTML = closed
 document.getElementById('approval').innerHTML = approval
+document.getElementById('enforcement').innerHTML = enforcement
 document.getElementById('approved').innerHTML = approved
