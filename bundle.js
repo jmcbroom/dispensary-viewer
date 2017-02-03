@@ -1184,7 +1184,7 @@ map.on('load', function(){
       var feature = features[0];
       var html = `
       <span class="b">Name</span><br/>
-      <span class="">${feature.properties.business_name}</span><br/>
+      <span class="">${feature.properties.name}</span><br/>
       <span class="b">Address</span><br/>
       <span class="">${feature.properties.address}</span><br/>
       <span class="b">Status</span><br/>
