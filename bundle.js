@@ -1122,6 +1122,24 @@ map.on('load', function(){
       }
   });
   map.addLayer({
+      "id": "marijuana-approval-operational",
+      "type": "circle",
+      "source": "marijuana",
+      "filter": ["in", "status", "In Approval Process / Operating"],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "circle-radius": {
+          stops: [[8, 1], [14, 7], [20, 12]]
+        },
+        "circle-color": "rgb(66, 185, 244)",
+        "circle-opacity": 0.66,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "black"
+      }
+  });
+  map.addLayer({
       "id": "marijuana-approval",
       "type": "circle",
       "source": "marijuana",
@@ -1177,7 +1195,7 @@ map.on('load', function(){
   });
   // open a popup on click
   map.on('click', function (e) {
-      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval', 'marijuana-closed', 'marijuana-approved'] });
+      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval','marijuana-approval-operational', 'marijuana-closed', 'marijuana-approved'] });
       if (!features.length) {
           return;
       }
@@ -1197,7 +1215,7 @@ map.on('load', function(){
   });
 
   map.on('mousemove', function (e) {
-      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval', 'marijuana-closed'] });
+      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval','marijuana-approved','marijuana-approval-operational', 'marijuana-closed'] });
       map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
   });
 })
@@ -1209,14 +1227,16 @@ countReq.send();
 
 // assign the numbers
 var count = JSON.parse(countReq.response)["features"];
-var closed = count[0]["attributes"]["status_count"];
-var enforcement = count[1]["attributes"]["status_count"];
-var approval = count[2]["attributes"]["status_count"];
-var approved = count[3]["attributes"]["status_count"];
+var closed = count[1]["attributes"]["status_count"];
+var enforcement = count[2]["attributes"]["status_count"];
+var approval = count[3]["attributes"]["status_count"];
+var approval_operational = count[0]["attributes"]["status_count"];
+var approved = count[4]["attributes"]["status_count"];
 
 // stick em in the HTML
 document.getElementById('closed').innerHTML = closed
 document.getElementById('approval').innerHTML = approval
+document.getElementById('approval_operational').innerHTML = approval_operational
 document.getElementById('enforcement').innerHTML = enforcement
 document.getElementById('approved').innerHTML = approved
 
