@@ -9,14 +9,14 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/jmcbroom/cixs0h7mr001m2ro6gbvjgufn',
     doubleClickZoom: false,
-    zoom: 10.7,
-    center: [-83.091, 42.350],
+    zoom: 10,
+    center: [-83.09, 42.33],
     // :triangular_ruler:
     bearing: -1.25,
     minZoom: 9,
     maxBounds: [
-        [-83.611, 42.100],
-        [-82.511, 42.600]
+        [-83.611, 41.900],
+        [-82.511, 42.800]
     ]
 });
 
@@ -26,7 +26,7 @@ map.addControl(nav, 'top-right');
 // once the map's loaded
 map.on('load', function(){
   // add the dispensaries
-  map.addSource('marijuana', {
+  map.addSource('locations', {
     type: 'geojson',
     data: 'https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson'
   });
@@ -60,7 +60,7 @@ map.on('load', function(){
         },
         "line-width": {
             stops: [
-                [8, 0.1],
+                [8, 0.5],
                 [11, 1.5],
                 [13, 5],
                 [22, 18]
@@ -69,12 +69,11 @@ map.on('load', function(){
     }
   });
 
-  // a layer for the closed ones
+  // layer for all:
   map.addLayer({
-      "id": "marijuana-closed",
+      "id": "locations",
       "type": "circle",
-      "source": "marijuana",
-      "filter": ["in", "status", "Closed By Order"],
+      "source": "locations",
       "layout": {
         "visibility": "visible"
       },
@@ -82,87 +81,27 @@ map.on('load', function(){
         "circle-radius": {
           stops: [[8, 1], [14, 7], [20, 12]]
         },
-        "circle-color": "red",
-        "circle-opacity": 0.66,
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "black"
-      }
-  });
-  map.addLayer({
-      "id": "marijuana-approval-operational",
-      "type": "circle",
-      "source": "marijuana",
-      "filter": ["in", "status", "In Approval Process / Operating"],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "circle-radius": {
-          stops: [[8, 1], [14, 7], [20, 12]]
+        "circle-color": {
+          "property": "status",
+          "type": "categorical",
+          stops: [
+            ["Closed By Order", "red"],
+            ["In Enforcement Process", "orange"],
+            ["In Approval Process", "yellow"],
+            ["In Approval Process / Operating", "rgb(75, 166, 252)"],
+            ["MMCC Approved", "green"],
+          ]
         },
-        "circle-color": "rgb(66, 185, 244)",
         "circle-opacity": 0.66,
         "circle-stroke-width": 1,
         "circle-stroke-color": "black"
       }
   });
-  map.addLayer({
-      "id": "marijuana-approval",
-      "type": "circle",
-      "source": "marijuana",
-      "filter": ["in", "status", "In Approval Process"],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "circle-radius": {
-          stops: [[8, 1], [14, 7], [20, 12]]
-        },
-        "circle-color": "yellow",
-        "circle-opacity": 0.66,
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "black"
-      }
-  });
-  map.addLayer({
-      "id": "marijuana-enforcement",
-      "type": "circle",
-      "source": "marijuana",
-      "filter": ["in", "status", "In Enforcement Process"],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "circle-radius": {
-          stops: [[8, 1], [14, 7], [20, 12]]
-        },
-        "circle-color": "orange",
-        "circle-opacity": 0.66,
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "black"
-      }
-  });
-  map.addLayer({
-      "id": "marijuana-approved",
-      "type": "circle",
-      "source": "marijuana",
-      "filter": ["in", "status", "MMCC Approved"],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "circle-radius": {
-          stops: [[8, 1], [14, 7], [20, 12]]
-        },
-        "circle-color": "green",
-        "circle-opacity": 0.66,
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "black"
-      }
-  });
+
+
   // open a popup on click
   map.on('click', function (e) {
-      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval','marijuana-approval-operational', 'marijuana-closed', 'marijuana-approved'] });
+      var features = map.queryRenderedFeatures(e.point, { layers: ['locations'] });
       if (!features.length) {
           return;
       }
@@ -182,7 +121,7 @@ map.on('load', function(){
   });
 
   map.on('mousemove', function (e) {
-      var features = map.queryRenderedFeatures(e.point, { layers: ['marijuana-enforcement', 'marijuana-approval','marijuana-approved','marijuana-approval-operational', 'marijuana-closed'] });
+      var features = map.queryRenderedFeatures(e.point, { layers: ['locations'] });
       map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
   });
 })
@@ -191,18 +130,20 @@ map.on('load', function(){
 var countReq = new XMLHttpRequest();
 countReq.open("GET", "https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=status&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22status%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
 countReq.send();
+var count = JSON.parse(countReq.response)["features"];
 
 // assign the numbers
-var count = JSON.parse(countReq.response)["features"];
-var closed = count[1]["attributes"]["status_count"];
-var enforcement = count[2]["attributes"]["status_count"];
-var approval = count[3]["attributes"]["status_count"];
-var approval_operational = count[0]["attributes"]["status_count"];
-var approved = count[4]["attributes"]["status_count"];
-
-// stick em in the HTML
-document.getElementById('closed').innerHTML = closed
-document.getElementById('approval').innerHTML = approval
-document.getElementById('approval_operational').innerHTML = approval_operational
-document.getElementById('enforcement').innerHTML = enforcement
-document.getElementById('approved').innerHTML = approved
+count.forEach(function(c) {
+  switch(c["attributes"]["status"]) {
+    case "Closed By Order":
+      document.getElementById('closed').innerHTML = c["attributes"]["status_count"]
+    case "MMCC Approved":
+      document.getElementById('approved').innerHTML = c["attributes"]["status_count"]
+    case "In Enforcement Process":
+      document.getElementById('enforcement').innerHTML = c["attributes"]["status_count"]
+    case "In Approval Process / Operating":
+      document.getElementById('approval_operational').innerHTML = c["attributes"]["status_count"]
+    case "In Approval Process":
+      document.getElementById('approval').innerHTML = c["attributes"]["status_count"]
+  }
+})
