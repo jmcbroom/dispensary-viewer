@@ -131,19 +131,32 @@ var countReq = new XMLHttpRequest();
 countReq.open("GET", "https://gis.detroitmi.gov/arcgis/rest/services/BSEED/MedicalMarihuana/MapServer/0/query?where=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=&returnGeometry=true&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnDistinctValues=false&orderByFields=&groupByFieldsForStatistics=status&outStatistics=%5B%0D%0A++++%7B%0D%0A++++++++%22statisticType%22%3A+%22count%22%2C%0D%0A++++++++%22onStatisticField%22%3A+%22status%22%2C%0D%0A++++++++%22outStatisticFieldName%22%3A+%22status_count%22%0D%0A++++%7D%0D%0A%5D%0D%0A&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&quantizationParameters=&sqlFormat=none&f=pjson", false);
 countReq.send();
 var count = JSON.parse(countReq.response)["features"];
+console.log(count);
 
 // assign the numbers
 count.forEach(function(c) {
   switch(c["attributes"]["status"]) {
     case "Closed By Order":
+      console.log("Closed By Order", c['attributes']['status_count'])
       document.getElementById('closed').innerHTML = c["attributes"]["status_count"]
+      break
     case "MMCC Approved":
+      console.log("MMCC Approved", c['attributes']['status_count'])
       document.getElementById('approved').innerHTML = c["attributes"]["status_count"]
+      break
     case "In Enforcement Process":
+      console.log("In Enforcement Process", c['attributes']['status_count'])
       document.getElementById('enforcement').innerHTML = c["attributes"]["status_count"]
+      break
     case "In Approval Process / Operating":
+      console.log("In Approval Process / Operating", c['attributes']['status_count'])
       document.getElementById('approval_operational').innerHTML = c["attributes"]["status_count"]
+      break
     case "In Approval Process":
+      console.log("In Approval Process", c['attributes']['status_count'])
       document.getElementById('approval').innerHTML = c["attributes"]["status_count"]
+      break
+    default:
+      break
   }
 })
