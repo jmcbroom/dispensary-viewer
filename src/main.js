@@ -10,7 +10,7 @@ import Locate from './locate.js'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjajhmenkzejYwNm56MnFvNmF1anhmaXN6In0.hOESlZup6yOhJB8bH9kiWA';
 
-document.getElementById('map').style.height = `${window.innerHeight - 75}px`;
+document.getElementById('map').style.height = `${window.innerHeight * 0.79}px`;
 // document.getElementById('map').style.height = `${window.innerHeight}px`;
 
 var map = new mapboxgl.Map({
