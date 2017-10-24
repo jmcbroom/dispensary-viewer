@@ -1,0 +1,148 @@
+mmcc:
+  slug: mmcc
+  name: Medical Marijuana Caregiver Centers
+  category:
+  source:
+    type: socrata
+    url: 5dsb-b4t3
+    params:
+      $select: address, name, action, location
+      $limit: 100000
+  layers:
+    - name: MMCC Approved
+      type: circle
+      filter: ["==", "action", "MMCC Approved"]
+      layout:
+        visibility: visible
+      paint:
+        circle-color: green
+        circle-radius:
+          stops:
+            - [9, 2]
+            - [9.1, 2.5]
+            - [14, 7]
+            - [16, 10]
+            - [19, 15]
+        circle-opacity:
+          stops:
+            - [9, 0.6]
+            - [14, 0.9]
+            - [20, 1]
+        circle-stroke-width:
+          stops:
+            - [9, 0.5]
+            - [14, 1]
+            - [19, 2]
+        circle-stroke-color: black
+    - name: In Approval Process / Operating
+      type: circle
+      filter: ["==", "action", "In Approval Process / Operating"]
+      layout:
+        visibility: visible
+      paint:
+        circle-color: skyblue
+        circle-radius:
+          stops:
+            - [9, 2]
+            - [9.1, 2.5]
+            - [14, 7]
+            - [16, 10]
+            - [19, 15]
+        circle-opacity:
+          stops:
+            - [9, 0.6]
+            - [14, 0.9]
+            - [20, 1]
+        circle-stroke-width:
+          stops:
+            - [9, 0.5]
+            - [14, 1]
+            - [19, 2]
+        circle-stroke-color: black
+    - name: In Approval Process
+      type: circle
+      filter: ["==", "action", "In Approval Process"]
+      layout:
+        visibility: visible
+      paint:
+        circle-color: gold
+        circle-radius:
+          stops:
+            - [9, 2]
+            - [9.1, 2.5]
+            - [14, 7]
+            - [16, 10]
+            - [19, 15]
+        circle-opacity:
+          stops:
+            - [9, 0.6]
+            - [14, 0.9]
+            - [20, 1]
+        circle-stroke-width:
+          stops:
+            - [9, 0.5]
+            - [14, 1]
+            - [19, 2]
+        circle-stroke-color: black
+    - name: In Enforcement Process
+      type: circle
+      filter: ["==", "action", "In Enforcement Process"]
+      layout:
+        visibility: visible
+      paint:
+        circle-color: orange
+        circle-radius:
+          stops:
+            - [9, 2]
+            - [9.1, 2.5]
+            - [14, 7]
+            - [16, 10]
+            - [19, 15]
+        circle-opacity:
+          stops:
+            - [9, 0.6]
+            - [14, 0.9]
+            - [20, 1]
+        circle-stroke-width:
+          stops:
+            - [9, 0.5]
+            - [14, 1]
+            - [19, 2]
+        circle-stroke-color: black
+    - name: Closed By Order
+      type: circle
+      filter: ["==", "action", "Closed By Order"]
+      layout:
+        visibility: visible
+      paint:
+        circle-color: red
+        circle-radius:
+          stops:
+            - [9, 2]
+            - [9.1, 2.5]
+            - [14, 7]
+            - [16, 10]
+            - [19, 15]
+        circle-opacity:
+          stops:
+            - [9, 0.6]
+            - [14, 0.9]
+            - [20, 1]
+        circle-stroke-width:
+          stops:
+            - [9, 0.5]
+            - [14, 1]
+            - [19, 2]
+        circle-stroke-color: black
+  popup:
+    title: Caregiver Center
+    columns:
+      - field: address
+        type: text
+        name: Address
+      - field: name
+        type: text
+        name: Name
+      - field: action
+        type: text
+        name: Status
