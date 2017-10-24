@@ -1,60 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<title> </title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.29.0/mapbox-gl.css' rel='stylesheet' />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
-<link rel="stylesheet" href="style.css">
-<style>
-    .det-overmap {
-        position: fixed;
-        bottom: 0;
-        z-index: 5;
-        background-color: rgba(255, 255, 255, .5);
-    }
+<html>
 
-    .det-legend p {
-        padding: 10px;
-        margin: 0px;
-    }
-
-    .det-status span {
-      display: block;
-      margin-top: 2px;
-    }
-
-    /* body #map {margin-bottom: -100px !important;} */
-</style>
+<head>
+  <meta charset='utf-8' />
+  <title></title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.8.1/css/tachyons.min.css" />
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
 
 <body>
-    <div id="map"></div>
-    <div style="clear: both;"></div>
-    <div class="det-overmap">
-        <h1 style="margin: 10px;"><span class="fw7 f4 b" style="color: #333; margin-bottom: 10px;">Medical Marihuana Caregiver Center Application Status</span></h1>
-        <table class="det-legend">
-            <tr>
-                <!-- <td><p id="selected" style="margin-top: 0; font-weight: 700;">Status</p></td> -->
-                <td class="bg-dark-red det-status">
-                    <p>Closed by <br/>Order: <span id="closed" class="fw7 f4 b">-</span></p>
-                </td>
-                <td class="bg-yellow det-status">
-                    <p>In Approval <br/>Process: <span id="approval" class="fw7 f4 b">-</span></p>
-                </td>
-                <td class="bg-light-blue det-status">
-                    <p>In Approval Process <br/>& Operating: <span id="approval_operational" class="fw7 f4 b">-</span></p>
-                </td>
-                <td class="bg-orange det-status">
-                    <p>In Enforcement <br/>Process: <span id="enforcement" class="fw7 f4 b">-</span></p>
-                </td>
-                <td class="bg-dark-green det-status">
-                    <p>MMCC<br/>Approved: <span id="approved" class="fw7 f4 b">-</span></p>
-                </td>
-            </tr>
-        </table>
+  <nav class="pa1 pa1-m bg-moon-gray">
+    <img src="./img/green.png" class="h1 w1 dib v-mid">
+    <a class="link dim black b f7 f6-ns dib mr3" href="#" title="Home">Medical Marijuana Caregiver Centers</a>
+    <!-- <a class="link dim gray    f7 f6-ns dib mr3" href="#" title="About">About</a> -->
+    <a class="link dim gray    f7 f6-ns dib mr3" href="https://data.detroitmi.gov/d/5dsb-b4t3" title="Data">Data</a>
+    <a class="link dim gray    f7 f6-ns dib" href="https://github.com/CityOfDetroit/dispensary-viewer" title="Code">Code</a>
+  </nav>
+
+  <div class="cf h-75">
+    <div class="fl w-100 pa1 pa2-m h-75" id='legend'>
     </div>
-    <script src="./bundle.js"></script>
+    <div class="fl w-100 h-75">
+      <div class="bg-white h-75" id="map"></div>
+    </div>
+
+  </div>
+  <script src="./bundle.js"></script>
 </body>
 
 </html>
