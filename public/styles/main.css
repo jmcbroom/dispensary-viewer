@@ -8,6 +8,10 @@ body {
   display: flex;
 }
 
+.w6 {
+  width: 20rem;
+}
+
 @media(max-width: 1020px) {
   input[type=checkbox] {
     transform: scale(1);

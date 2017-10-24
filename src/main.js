@@ -97,6 +97,18 @@ map.on('load', function() {
         });
     })
 
+    // listen for Enter keypress on address/intersection search bar
+    let search = document.querySelector("#locate")
+    search.addEventListener("keypress", e => {
+        if(e.key == 'Enter') {
+            Locate.geocodeAddress(e.target.value).then(result => {
+                console.log(result)
+                let coords = result['candidates'][0]['location']
+                map.flyTo({center: [coords.x, coords.y], zoom: 14.5})
+            })
+        }
+    })
+
     // listen to mapClick on interactiveLayers, and make popup
     let popup = null
     map.on('click', e => {

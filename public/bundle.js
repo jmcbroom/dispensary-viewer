@@ -44147,6 +44147,18 @@ map.on('load', function () {
         });
     });
 
+    // listen for Enter keypress on address/intersection search bar
+    var search = document.querySelector("#locate");
+    search.addEventListener("keypress", function (e) {
+        if (e.key == 'Enter') {
+            _locate2.default.geocodeAddress(e.target.value).then(function (result) {
+                console.log(result);
+                var coords = result['candidates'][0]['location'];
+                map.flyTo({ center: [coords.x, coords.y], zoom: 14.5 });
+            });
+        }
+    });
+
     // listen to mapClick on interactiveLayers, and make popup
     var popup = null;
     map.on('click', function (e) {
