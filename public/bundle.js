@@ -43979,7 +43979,7 @@ var _ = require('lodash');
 var Legend = {
 
   addLayer: function addLayer(layerTable, layer, url) {
-    var divHTML = '\n        <div class=\'dib pa1 pa2-ns\' style="background: ' + layer.paint['circle-color'] + ';">\n          <span class=\'f7 f6-ns fw7\'>' + layer.name + ': </span>\n          <span class=\'f7 f6-ns\' id="' + _helpers2.default.slugify(layer.name) + '-count"></span>\n        </div>\n          ';
+    var divHTML = '\n        <div class=\'dib pa1 pa2-ns v-mid\' style="background: ' + layer.paint['circle-color'] + ';">\n          <span class=\'f6 f5-ns fw4 mr1 v-mid dib\'>' + layer.name + '</span>\n          <span class=\'f5 f4-ns fw5 v-mid dib\' id="' + _helpers2.default.slugify(layer.name) + '-count"></span>\n        </div>\n          ';
     layerTable.innerHTML += divHTML;
     return divHTML;
   },
@@ -44063,8 +44063,8 @@ var _ = require('lodash');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjajhmenkzejYwNm56MnFvNmF1anhmaXN6In0.hOESlZup6yOhJB8bH9kiWA';
 
-// document.getElementById('map').style.height = `${window.innerHeight - 68}px`;
-document.getElementById('map').style.height = window.innerHeight + 'px';
+document.getElementById('map').style.height = window.innerHeight - 75 + 'px';
+// document.getElementById('map').style.height = `${window.innerHeight}px`;
 
 var map = new mapboxgl.Map({
     container: 'map',

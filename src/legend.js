@@ -5,9 +5,9 @@ const Legend = {
 
   addLayer: function(layerTable, layer, url) {
     let divHTML = `
-        <div class='dib pa1 pa2-ns' style="background: ${layer.paint['circle-color']};">
-          <span class='f7 f6-ns fw7'>${layer.name}: </span>
-          <span class='f7 f6-ns' id="${Helpers.slugify(layer.name)}-count"></span>
+        <div class='dib pa1 pa2-ns v-mid' style="background: ${layer.paint['circle-color']};">
+          <span class='f6 f5-ns fw4 mr1 v-mid dib'>${layer.name}</span>
+          <span class='f5 f4-ns fw5 v-mid dib' id="${Helpers.slugify(layer.name)}-count"></span>
         </div>
           `        
     layerTable.innerHTML += divHTML

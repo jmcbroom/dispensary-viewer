@@ -4,8 +4,8 @@ body {
   font-family: 'Fira Sans';
 }
 
-input[type=checkbox] {
-  transform: translate(-2px,4px) scale(1.5);
+#legend {
+  display: flex;
 }
 
 @media(max-width: 1020px) {
@@ -14,18 +14,8 @@ input[type=checkbox] {
   }
 }
 
-td img{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mapboxgl-popup-content {
   max-height: 200px;
   overflow-y: scroll;
   max-width: 300px;
-}
-
-.w-5{
-  width: 5%;
 }
