@@ -1,12 +1,35 @@
-const Helpers = {
+var moment = require('moment')
 
-  /** 
-   * Increments a number by one
-   * @param {number} num - a positive or negative number
-   * @returns {number} - num plus one
-   */
-  example: function(num) {
-    return num + 1;
+const Helpers = {
+  makeParamString: function(p) {
+    return Object.keys(p).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(p[k])}`).join("&") 
+  },
+
+  slugify: function(text) {
+    return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+  },
+
+  formatPopupValue: function(value, type) {
+    switch(type) {
+      case "text":
+        return value
+        break;
+      case "date":
+        console.log(value)
+        if (value != 'null') {
+          return moment(value).format('ll')          
+        }
+        else { return 'n/a' }
+        break;
+      case "money":
+        return '$' + parseInt(value).toFixed(2)
+        break
+    }
   }
 
 }

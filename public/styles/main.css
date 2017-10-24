@@ -1,11 +1,31 @@
 body { 
   margin: 0; 
-  padding: 0; 
+  padding: 0;
+  font-family: 'Fira Sans';
 }
 
-#map { 
-  position: absolute; 
-  top: 0; 
-  bottom: 0; 
-  width:  100%; 
+input[type=checkbox] {
+  transform: translate(-2px,4px) scale(1.5);
+}
+
+@media(max-width: 1020px) {
+  input[type=checkbox] {
+    transform: scale(1);
+  }
+}
+
+td img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mapboxgl-popup-content {
+  max-height: 200px;
+  overflow-y: scroll;
+  max-width: 300px;
+}
+
+.w-5{
+  width: 5%;
 }
