@@ -43920,27 +43920,6 @@ module.exports = Yaml;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _helpers = require('./helpers.js');
-
-var _helpers2 = _interopRequireDefault(_helpers);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Esri = {
-  makeURL: function makeURL(url, type, params) {
-    return url + '/query?' + _helpers2.default.makeParamString(params);
-  }
-};
-
-exports.default = Esri;
-
-},{"./helpers.js":16}],16:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var moment = require('moment');
 
 var Helpers = {
@@ -43981,7 +43960,7 @@ var Helpers = {
 
 exports.default = Helpers;
 
-},{"moment":3}],17:[function(require,module,exports){
+},{"moment":3}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44015,7 +43994,7 @@ var Legend = {
 
 exports.default = Legend;
 
-},{"./helpers.js":16,"lodash":1}],18:[function(require,module,exports){
+},{"./helpers.js":15,"lodash":1}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44053,7 +44032,7 @@ var Locate = {
 
 exports.default = Locate;
 
-},{"./helpers.js":16}],19:[function(require,module,exports){
+},{"./helpers.js":15}],18:[function(require,module,exports){
 'use strict';
 
 var _helpers = require('./helpers.js');
@@ -44063,10 +44042,6 @@ var _helpers2 = _interopRequireDefault(_helpers);
 var _socrata = require('./socrata.js');
 
 var _socrata2 = _interopRequireDefault(_socrata);
-
-var _esri = require('./esri.js');
-
-var _esri2 = _interopRequireDefault(_esri);
 
 var _map = require('./map.js');
 
@@ -44122,7 +44097,7 @@ map.on('load', function () {
                 console.log(sodaUrl);
                 break;
             case "esri":
-                var esriUrl = _esri2.default.makeURL(ds.source.url, 'geojson', ds.source.params);
+                var esriUrl = Esri.makeURL(ds.source.url, 'geojson', ds.source.params);
                 console.log(esriUrl);
                 _map2.default.addGeoJsonSource(map, ds.slug, esriUrl);
                 break;
@@ -44185,7 +44160,7 @@ map.on('load', function () {
     });
 });
 
-},{"./esri.js":15,"./helpers.js":16,"./legend.js":17,"./locate.js":18,"./map.js":20,"./socrata.js":21,"lodash":1,"mapbox-gl":2,"yamljs":14}],20:[function(require,module,exports){
+},{"./helpers.js":15,"./legend.js":16,"./locate.js":17,"./map.js":19,"./socrata.js":20,"lodash":1,"mapbox-gl":2,"yamljs":14}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44227,7 +44202,7 @@ var Map = {
 
 exports.default = Map;
 
-},{"./helpers.js":16,"mapbox-gl":2}],21:[function(require,module,exports){
+},{"./helpers.js":15,"mapbox-gl":2}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44248,4 +44223,4 @@ var Socrata = {
 
 exports.default = Socrata;
 
-},{"./helpers.js":16}]},{},[19]);
+},{"./helpers.js":15}]},{},[18]);

@@ -4,7 +4,6 @@ var _ = require('lodash');
 
 import Helpers from './helpers.js'
 import Socrata from './socrata.js'
-import Esri from './esri.js'
 import Map from './map.js'
 import Legend from './legend.js'
 import Locate from './locate.js'

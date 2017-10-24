@@ -1,5 +1,5 @@
 {
-  "name": "iet-template",
+  "name": "dispensary-viewer",
   "version": "1.0.0",
   "description": "A template for future projects",
   "main": "index.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CityOfDetroit/iet-template.git"
+    "url": "git+https://github.com/CityOfDetroit/dispensary-viewer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CityOfDetroit/iet-template/issues"
+    "url": "https://github.com/CityOfDetroit/dispensary-viewer/issues"
   },
-  "homepage": "https://github.com/CityOfDetroit/iet-template",
+  "homepage": "https://github.com/CityOfDetroit/dispensary-viewer",
   "dependencies": {
     "lodash": "^4.17.4",
     "mapbox-gl": "^0.40.1",
