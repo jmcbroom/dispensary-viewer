@@ -7,7 +7,7 @@ const Legend = {
     let divHTML = `
         <div class='dib pa1 pa2-ns v-mid' style="background: ${layer.paint['circle-color']};">
           <span class='f6 f5-ns fw4 mr1 v-mid dib'>${layer.name}</span>
-          <span class='f5 f4-ns fw5 v-mid dib' id="${Helpers.slugify(layer.name)}-count"></span>
+          <span class='f5 f4-ns fw5 v-mid dib' id="${Helpers.slugify(layer.name)}-count">0</span>
         </div>
           `        
     layerTable.innerHTML += divHTML

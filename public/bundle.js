@@ -43979,7 +43979,7 @@ var _ = require('lodash');
 var Legend = {
 
   addLayer: function addLayer(layerTable, layer, url) {
-    var divHTML = '\n        <div class=\'dib pa1 pa2-ns v-mid\' style="background: ' + layer.paint['circle-color'] + ';">\n          <span class=\'f6 f5-ns fw4 mr1 v-mid dib\'>' + layer.name + '</span>\n          <span class=\'f5 f4-ns fw5 v-mid dib\' id="' + _helpers2.default.slugify(layer.name) + '-count"></span>\n        </div>\n          ';
+    var divHTML = '\n        <div class=\'dib pa1 pa2-ns v-mid\' style="background: ' + layer.paint['circle-color'] + ';">\n          <span class=\'f6 f5-ns fw4 mr1 v-mid dib\'>' + layer.name + '</span>\n          <span class=\'f5 f4-ns fw5 v-mid dib\' id="' + _helpers2.default.slugify(layer.name) + '-count">0</span>\n        </div>\n          ';
     layerTable.innerHTML += divHTML;
     return divHTML;
   },
